@@ -1,0 +1,46 @@
+/**
+ ******************************************************************************
+ * @file           : main.h
+ * @author         : Kunal Salvi
+ * @brief          : Header for Important Functions
+ ******************************************************************************
+ *
+ ******************************************************************************
+ */
+
+#ifndef MAIN_H_
+#define MAIN_H_
+
+#include <stdint.h>
+#include "stm32f103xb.h"
+#include "stm32f1xx.h"
+
+
+
+struct MCU_Data{
+
+	int HSE_Fine;
+	int HSI_Fine;
+	int LSE_Fine;
+	int LSI_Fine;
+
+}MCU_Data;
+
+__STATIC_INLINE void MCU_Clock_Init(int32_t Clock_Speed)
+{
+	//Check if HSI, HSE, LSI, LSE are intact and operating.
+	//We need HSE for normal operation, but if it fails the program needs to shift to HSI and keep the same clock frequency.
+	//For STM32F103C8, HSI and HSE are 8MHz, so all the configurations are dependent on PLLMULL for HSE to reach max 72 MHz
+	//and 64 MHz on HSI
+	SystemInit();
+
+
+
+
+
+
+
+
+}
+
+#endif /* MAIN_H_ */

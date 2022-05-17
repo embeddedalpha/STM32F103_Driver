@@ -1,0 +1,36 @@
+/*
+ * CAN.c
+ *
+ *  Created on: May 16, 2022
+ *      Author: Kunal
+ */
+
+
+#include "CAN.h"
+
+
+void CAN_Init(int32_t baudrate)
+{
+	RCC -> APB1ENR |= RCC_APB1ENR_CAN1EN;
+	GPIO_Pin_Setup(GPIOA, 3, ALT_FUNCTION_OUTPUT_PUSH_PULL);
+	GPIO_Pin_Setup(GPIOA, 4, INPUT_FLOATING);
+	CAN1 -> MCR |= CAN_MCR_INRQ;
+	while(!(CAN1-> MSR & CAN_MSR_INAK)){}
+	CAN1 -> BTR = baudrate;
+
+}
+
+void CAN_TX_Mailbox1(void)
+{
+
+}
+
+void CAN_TX_Mailbox2(void)
+{
+
+}
+
+void CAN_TX_Mailbox3(void)
+{
+
+}

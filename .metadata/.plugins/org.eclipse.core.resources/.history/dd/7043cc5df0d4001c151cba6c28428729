@@ -1,0 +1,16 @@
+#include "GPIO.h"
+
+
+
+void GPIO_Pin_Setup(GPIO_TypeDef *Port, uint8_t pin, uint8_t function)
+{
+	if(pin < 8)
+	{
+		Port -> CRL |= function << pin;
+	}
+	else
+	{
+		Port -> CRH |= function << pin;
+	}
+}
+

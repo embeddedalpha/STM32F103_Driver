@@ -1,0 +1,4 @@
+CAN.c:12:6:CAN_Init	16	static
+CAN.c:36:6:CAN_TX_Mailbox1	4	static
+CAN.c:80:6:CAN_TX_Mailbox2	4	static
+CAN.c:122:6:CAN_TX_Mailbox3	4	static

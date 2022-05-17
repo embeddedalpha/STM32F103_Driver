@@ -1,0 +1,90 @@
+#include "GPIO.h"
+
+
+
+void GPIO_Pin_Setup(GPIO_TypeDef *Port, uint8_t pin, uint8_t function)
+{
+	if(port == GPIOA)
+	{
+		if((mode == ALT_OPEN_DRAIN_OUTPUT) || (mode == ALT_PUSH_PULL_OUTPUT))
+		{
+			RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_AFIOEN;
+		}
+		else
+		{
+			RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+		}
+
+		if(pin < 8)
+		{
+			port -> CRL |= mode << (4*pin);
+		}
+		else
+		{
+			port -> CRH |= mode << (4*(pin - 8));
+		}
+	}
+
+
+	if(port == GPIOB)
+	{
+		if((mode == ALT_OPEN_DRAIN_OUTPUT) || (mode == ALT_PUSH_PULL_OUTPUT))
+		{
+			RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_AFIOEN;
+		}
+		else
+		{
+			RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
+		}
+
+		if(pin < 8)
+		{
+			port -> CRL |= mode << (4*pin);
+		}
+		else
+		{
+			port -> CRH |= mode << (4*(pin - 8));
+		}
+	}
+
+	if(port == GPIOC)
+	{
+		if((mode == ALT_OPEN_DRAIN_OUTPUT) || (mode == ALT_PUSH_PULL_OUTPUT))
+		{
+			RCC->APB2ENR |= RCC_APB2ENR_IOPCEN | RCC_APB2ENR_AFIOEN;
+		}
+		else
+		{
+			RCC->APB2ENR |= RCC_APB2ENR_IOPcEN;
+		}
+
+		if(pin < 8)
+		{
+			port -> CRL |= mode << (4*pin);
+		}
+		else
+		{
+			port -> CRH |= mode << (4*(pin - 8));
+		}
+	}
+}
+
+void GPIO_Interrupt_Setup(int pin, int edge_select)
+{
+	EXTI ->IMR |= 1 << pin;
+	switch (edge_select) {
+		case 0:
+			EXTI ->RTSR |= 1 << pin;
+			break;
+		case 1:
+			EXTI ->FTSR |= 1 << pin;
+			break;
+		case 2:
+			EXTI ->RTSR |= 1 << pin;
+			EXTI ->FTSR |= 1 << pin;
+			break;
+	}
+
+	NVIC_SetPriority(EXTI0_IRQn,0);
+	NVIC_EnableIRQ(EXTI0_IRQn);
+}

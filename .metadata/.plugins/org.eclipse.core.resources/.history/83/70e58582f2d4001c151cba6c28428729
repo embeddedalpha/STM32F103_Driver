@@ -1,0 +1,30 @@
+/*
+ * CAN.h
+ *
+ *  Created on: May 16, 2022
+ *      Author: Kunal
+ */
+
+#ifndef CAN_H_
+#define CAN_H_
+
+
+#include "main.h"
+#include "GPIO.h"
+
+#define CAN_BAUDRATE_1000_KBPS
+#define CAN_BAUDRATE_750_KBPS
+#define CAN_BAUDRATE_500_KBPS
+#define CAN_BAUDRATE_250_KBPS
+#define CAN_BAUDRATE_200_KBPS
+#define CAN_BAUDRATE_150_KBPS
+#define CAN_BAUDRATE_125_KBPS
+#define CAN_BAUDRATE_100_KBPS
+#define CAN_BAUDRATE_75_KBPS
+#define CAN_BAUDRATE_50_KBPS
+#define CAN_BAUDRATE_10_KBPS
+#define CAN_BAUDRATE_5_KBPS
+#define CAN_BAUDRATE_1_KBPS
+
+
+#endif /* CAN_H_ */

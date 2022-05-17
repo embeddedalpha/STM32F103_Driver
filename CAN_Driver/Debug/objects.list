@@ -1,0 +1,7 @@
+"./CAN/CAN.o"
+"./GPIO/GPIO.o"
+"./Src/main.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Src/system_stm32f1xx.o"
+"./Startup/startup_stm32f103c8tx.o"
