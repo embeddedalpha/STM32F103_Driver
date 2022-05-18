@@ -1,3 +1,16 @@
+/**
+ ************************************************************************************************
+ * @file           : GPIO.h
+ * @author         : Kunal Salvi
+ * @brief          : Header File for GPIO Driver
+ ***********************************************************************************************
+ * This is the header file for the GPIO driver and is to be called when a physical pin of the MCU
+ * is to be configured.
+ ************************************************************************************************
+ */
+
+
+
 #ifndef _GPIO_H_
 #define _GPIO_H_
 

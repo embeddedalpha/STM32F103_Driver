@@ -1,4 +1,6 @@
 "./CAN/CAN.o"
+"./CAN/CANOpen_V1.o"
+"./Console/Console.o"
 "./GPIO/GPIO.o"
 "./Src/main.o"
 "./Src/syscalls.o"

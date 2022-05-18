@@ -21,6 +21,7 @@ OBJCOPY_BIN :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 CAN \
+Console \
 GPIO \
 Src \
 Startup \

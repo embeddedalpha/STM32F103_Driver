@@ -1,0 +1,14 @@
+/*
+ * Console.h
+ *
+ *  Created on: 17-May-2022
+ *      Author: Kunal
+ */
+
+#ifndef CONSOLE_H_
+#define CONSOLE_H_
+
+#include "main.h"
+#include "GPIO.h"
+
+#endif /* CONSOLE_H_ */

@@ -12,6 +12,7 @@ RM := rm -rf
 -include Startup/subdir.mk
 -include Src/subdir.mk
 -include GPIO/subdir.mk
+-include Console/subdir.mk
 -include CAN/subdir.mk
 -include objects.mk
 

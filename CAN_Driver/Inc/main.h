@@ -4,8 +4,6 @@
  * @author         : Kunal Salvi
  * @brief          : Header for Important Functions
  ******************************************************************************
- *
- ******************************************************************************
  */
 
 #ifndef MAIN_H_
@@ -14,6 +12,15 @@
 #include <stdint.h>
 #include "stm32f103xb.h"
 #include "stm32f1xx.h"
+#include "string.h"
+#include "stdbool.h"
+#include "stdlib.h"
+#include "stdarg.h"
+#include "stdint.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "inttypes.h"
+
 
 uint32_t APB1CLK_SPEED;
 uint32_t APB2CLK_SPEED;
@@ -95,6 +102,9 @@ __STATIC_INLINE uint32_t Delay_s(unsigned long s)
 	}
 	return (0UL);
 }
+
+
+
 
 
 

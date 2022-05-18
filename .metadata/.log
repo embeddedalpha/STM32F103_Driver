@@ -209,3 +209,33 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\Kunal\S
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-05-17 14:59:43.689
 !MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2022-05-17 21:40:28.176 -----------------------------------------------
+eclipse.buildId=Version 1.8.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-05-17 21:41:15.655
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-05-17 21:41:16.030
+!MESSAGE Log4j initialized with config file C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-05-17 21:41:38.663
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2022-05-18 10:42:42.414 -----------------------------------------------
+eclipse.buildId=Version 1.8.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2022-05-18 10:43:05.083
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2022-05-18 10:43:05.286
+!MESSAGE Log4j initialized with config file C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\.metadata\.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2022-05-18 10:43:21.769
+!MESSAGE Started RMI Server, listening on port 41337

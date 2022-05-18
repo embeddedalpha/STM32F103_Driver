@@ -1,0 +1,75 @@
+/*
+ * CAN.h
+ *
+ *  Created on: May 16, 2022
+ *      Author: Kunal
+ */
+
+#ifndef CAN_H_
+#define CAN_H_
+
+
+#include "main.h"
+#include "GPIO.h"
+
+
+#define _CAN_DEBUG_
+
+#define CAN_BAUDRATE_1000_KBPS	0x001e0001
+#define CAN_BAUDRATE_750_KBPS   0x001c0002
+#define CAN_BAUDRATE_500_KBPS   0x001e0003
+#define CAN_BAUDRATE_250_KBPS   0x001e0007
+#define CAN_BAUDRATE_200_KBPS   0x001e0009
+#define CAN_BAUDRATE_150_KBPS   0x001c000e
+#define CAN_BAUDRATE_125_KBPS   0x001e000f
+#define CAN_BAUDRATE_100_KBPS   0x001e0013
+#define CAN_BAUDRATE_75_KBPS    0x001c001d
+#define CAN_BAUDRATE_50_KBPS    0x001e0027
+#define CAN_BAUDRATE_25_KBPS    0x001e004f
+#define CAN_BAUDRATE_10_KBPS    0x001e00c7
+#define CAN_BAUDRATE_5_KBPS     0x001e018f
+
+#define CAN_Frame_Data 0
+#define CAN_Frame_Remote 10
+#define CAN_ID_Standard 0
+#define CAN_ID_Extended 10
+
+#define CAN_FILTER_MASK_MODE 0
+#define CAN_FILTER_LIST_MODE 10
+
+struct CAN_Mailbox1{
+	uint32_t Standard_ID;
+	uint32_t Extended_ID;
+	int ID_Type;
+	int Frame_Type;
+	int DLC;
+	int data[8];
+}CAN_Mailbox1;
+
+struct CAN_Mailbox2{
+	uint32_t Standard_ID;
+	uint32_t Extended_ID;
+	int ID_Type;
+	int Frame_Type;
+	int DLC;
+	int data[8];
+}CAN_Mailbox2;
+
+struct CAN_Mailbox3{
+	uint32_t Standard_ID;
+	uint32_t Extended_ID;
+	int ID_Type;
+	int Frame_Type;
+	int DLC;
+	int data[8];
+}CAN_Mailbox3;
+
+void CAN_Init(int32_t baudrate);
+
+void CAN_TX_Mailbox1(void);
+
+void CAN_TX_Mailbox2(void);
+
+void CAN_TX_Mailbox3(void);
+
+#endif /* CAN_H_ */
