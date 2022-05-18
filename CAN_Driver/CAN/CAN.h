@@ -11,6 +11,10 @@
 
 #include "main.h"
 #include "GPIO.h"
+#include "Console.h"
+
+
+#define _CAN_DEBUG_ 1
 
 #define CAN_BAUDRATE_1000_KBPS	0x001e0001
 #define CAN_BAUDRATE_750_KBPS   0x001c0002
@@ -34,39 +38,30 @@
 #define CAN_FILTER_MASK_MODE 0
 #define CAN_FILTER_LIST_MODE 10
 
-struct CAN_Mailbox1{
-	uint32_t Standard_ID;
-	uint32_t Extended_ID;
-	int ID_Type;
-	int Frame_Type;
-	int DLC;
-	int data[8];
-}CAN_Mailbox1;
 
-struct CAN_Mailbox2{
-	uint32_t Standard_ID;
-	uint32_t Extended_ID;
-	int ID_Type;
-	int Frame_Type;
-	int DLC;
-	int data[8];
-}CAN_Mailbox2;
+#define CAN_Initialization_Mode	    0x10
+#define CAN_Sleep_Mode			    0xEF
+#define CAN_Normal_Mode			    0x45
 
-struct CAN_Mailbox3{
-	uint32_t Standard_ID;
-	uint32_t Extended_ID;
+
+#define CAN_Mailbox_1 0x00
+#define CAN_Mailbox_2 0xAA
+#define CAN_Mailbox_3 0xFF
+
+typedef struct CAN_Mailbox{
+	int mailbox_id;
 	int ID_Type;
 	int Frame_Type;
-	int DLC;
+	uint32_t ID;
+	int data_length;
 	int data[8];
-}CAN_Mailbox3;
+}CAN_Mailbox;
+
 
 void CAN_Init(int32_t baudrate);
-
-void CAN_TX_Mailbox1(void);
-
-void CAN_TX_Mailbox2(void);
-
-void CAN_TX_Mailbox3(void);
+int CAN_Get_Operating_Mode(void);
+void CAN_Enter_Sleep_Mode(bool enable_disable);
+void CAN_ID_Filter(int filter_number, int filter_type, int32_t reg1, int32_t reg2 );
+void CAN_Send_Payload(CAN_Mailbox mailbox);
 
 #endif /* CAN_H_ */
