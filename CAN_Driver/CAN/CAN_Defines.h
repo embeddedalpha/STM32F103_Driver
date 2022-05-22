@@ -32,6 +32,9 @@
 #define CAN_FILTER_MASK_MODE 0
 #define CAN_FILTER_LIST_MODE 10
 
+#define CAN_Timestamp_Enable 1
+#define CAN_Timestamp_Disable 0
+
 
 #define CAN_Initialization_Mode	    0x10
 #define CAN_Sleep_Mode			    0xEF
@@ -41,5 +44,7 @@
 #define CAN_Mailbox_2 0xAA
 #define CAN_Mailbox_3 0xFF
 
+#define CAN_Timestamp_Enable 1
+#define CAN_Timestamp_Disable 0
 
 #endif /* CAN_DEFINES_H_ */
