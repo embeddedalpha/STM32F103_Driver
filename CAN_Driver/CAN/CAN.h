@@ -35,9 +35,10 @@ typedef struct CAN_Mailbox{
 
 
 void CAN_Init(CAN_Mailbox mailbox);
+void CAN_Send_Payload(CAN_Mailbox mailbox);
 int CAN_Get_Operating_Mode(void);
 void CAN_Enter_Sleep_Mode(void);
 void CAN_ID_Filter(int filter_number, int filter_type, int32_t reg1, int32_t reg2 );
-void CAN_Send_Payload(CAN_Mailbox mailbox);
+
 
 #endif /* CAN_H_ */
