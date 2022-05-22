@@ -25,6 +25,9 @@
 uint32_t APB1CLK_SPEED;
 uint32_t APB2CLK_SPEED;
 
+#define Use_External_Crystal 1
+#define Use_Internal_Crystal 2
+
 __STATIC_INLINE int32_t SystemAPB1_Clock_Speed(void)
 {
 	return (SystemCoreClock >> APBPrescTable[(RCC->CFGR & RCC_CFGR_PPRE1)>> RCC_CFGR_PPRE1_Pos]);
@@ -35,23 +38,47 @@ __STATIC_INLINE int32_t SystemAPB2_Clock_Speed(void)
 	return (SystemCoreClock >> APBPrescTable[(RCC->CFGR & RCC_CFGR_PPRE2)>> RCC_CFGR_PPRE2_Pos]);
 }
 
-__STATIC_INLINE void MCU_Clock_Init(void)
+__STATIC_INLINE void MCU_Clock_Init(int crystal)
 {
 	SystemInit();
-	RCC->CR |= RCC_CR_HSEON ;
-	while(!(RCC->CR & RCC_CR_HSERDY));
-	FLASH->ACR |= FLASH_ACR_PRFTBE|FLASH_ACR_LATENCY_2;
-	RCC->CFGR |= RCC_CFGR_PLLSRC;
-	RCC->CFGR |= RCC_CFGR_PLLXTPRE_HSE ;
-	RCC->CFGR |= RCC_CFGR_PLLMULL9;
-	RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
-	RCC->CR |= RCC_CR_PLLON;
-	while(!(RCC->CR & RCC_CR_PLLRDY));
-	RCC->CFGR |= RCC_CFGR_SW_PLL;
-	while(!(RCC->CFGR & RCC_CFGR_SWS_PLL));
-	SystemCoreClockUpdate();
-	APB1CLK_SPEED = SystemAPB1_Clock_Speed();
-	APB2CLK_SPEED = SystemAPB2_Clock_Speed();
+	switch (crystal) {
+		case Use_External_Crystal:
+		{
+			RCC->CR |= RCC_CR_HSEON ;
+			while(!(RCC->CR & RCC_CR_HSERDY));
+			FLASH->ACR |= FLASH_ACR_PRFTBE|FLASH_ACR_LATENCY_2;
+			RCC->CFGR |= RCC_CFGR_PLLSRC;
+			RCC->CFGR |= RCC_CFGR_PLLXTPRE_HSE ;
+			RCC->CFGR |= RCC_CFGR_PLLMULL9;
+			RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
+			RCC->CR |= RCC_CR_PLLON;
+			while(!(RCC->CR & RCC_CR_PLLRDY));
+			RCC->CFGR |= RCC_CFGR_SW_PLL;
+			while(!(RCC->CFGR & RCC_CFGR_SWS_PLL));
+			SystemCoreClockUpdate();
+			APB1CLK_SPEED = SystemAPB1_Clock_Speed();
+			APB2CLK_SPEED = SystemAPB2_Clock_Speed();
+		}
+			break;
+
+		case Use_Internal_Crystal:
+		{
+			SystemInit();
+			FLASH->ACR |= FLASH_ACR_PRFTBE|FLASH_ACR_LATENCY_2;
+			RCC->CFGR &= ~RCC_CFGR_PLLSRC;
+			RCC->CFGR |= RCC_CFGR_PLLXTPRE_HSE ;
+			RCC->CFGR |= RCC_CFGR_PLLMULL16;
+			RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
+			RCC->CR |= RCC_CR_PLLON;
+			while(!(RCC->CR & RCC_CR_PLLRDY));
+			RCC->CFGR |= RCC_CFGR_SW_PLL;
+			while(!(RCC->CFGR & RCC_CFGR_SWS_PLL));
+			SystemCoreClockUpdate();
+			APB1CLK_SPEED = SystemAPB1_Clock_Speed();
+			APB2CLK_SPEED = SystemAPB2_Clock_Speed();
+		}
+			break;
+	}
 }
 
 __STATIC_INLINE uint32_t Delay_Config(void)
