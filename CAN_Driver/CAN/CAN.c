@@ -136,11 +136,6 @@ void CAN_ID_Filter(int filter_number, int filter_type, int32_t reg1, int32_t reg
 
 void CAN_Send_Payload(CAN_Mailbox mailbox)
 {
-
-	CAN1 -> sTxMailBox[0].TDHR = 0x00;
-	CAN1 -> sTxMailBox[0].TDLR = 0x00;
-
-
 	switch (mailbox.mailbox_id)
 	{
 //=================================================================================================//
@@ -174,9 +169,22 @@ void CAN_Send_Payload(CAN_Mailbox mailbox)
 				}
 					break;
 			}
-			CAN1 -> sTxMailBox[0].TDTR = mailbox.data_length | CAN_TDT0R_TGT;
-//			CAN1 -> sTxMailBox[0].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
-//			CAN1 -> sTxMailBox[0].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 | mailbox.data[1] << 8 | mailbox.data[0] << 0;
+
+			if(mailbox.timestamp == CAN_Timestamp_Enable)
+			{
+				CAN1 -> sTxMailBox[0].TDTR = mailbox.data_length | CAN_TDT0R_TGT;
+				CAN1 -> sTxMailBox[0].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
+				CAN1 -> sTxMailBox[0].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 ;
+
+			}
+			else
+			{
+				CAN1 -> sTxMailBox[0].TDTR = mailbox.data_length;
+				CAN1 -> sTxMailBox[0].TDTR &= ~CAN_TDT0R_TGT;
+				CAN1 -> sTxMailBox[0].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
+				CAN1 -> sTxMailBox[0].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 | mailbox.data[1] << 8 | mailbox.data[0] << 0;
+
+			}
 			CAN1 -> sTxMailBox[0].TIR  |= CAN_TI0R_TXRQ;
 		}
 			break;
@@ -212,9 +220,21 @@ void CAN_Send_Payload(CAN_Mailbox mailbox)
 				}
 					break;
 			}
-			CAN1 -> sTxMailBox[1].TDTR = mailbox.data_length;
-			CAN1 -> sTxMailBox[1].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
-			CAN1 -> sTxMailBox[1].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 | mailbox.data[1] << 8 | mailbox.data[0] << 0;
+			if(mailbox.timestamp == CAN_Timestamp_Enable)
+			{
+				CAN1 -> sTxMailBox[1].TDTR = mailbox.data_length | CAN_TDT1R_TGT;
+				CAN1 -> sTxMailBox[1].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
+				CAN1 -> sTxMailBox[1].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 ;
+
+			}
+			else
+			{
+				CAN1 -> sTxMailBox[1].TDTR = mailbox.data_length;
+				CAN1 -> sTxMailBox[1].TDTR &= ~CAN_TDT1R_TGT;
+				CAN1 -> sTxMailBox[1].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
+				CAN1 -> sTxMailBox[1].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 | mailbox.data[1] << 8 | mailbox.data[0] << 0;
+
+			}
 			CAN1 -> sTxMailBox[1].TIR  |= CAN_TI1R_TXRQ;
 		}
 		break;
@@ -250,9 +270,21 @@ void CAN_Send_Payload(CAN_Mailbox mailbox)
 						}
 							break;
 					}
-					CAN1 -> sTxMailBox[2].TDTR = mailbox.data_length;
-					CAN1 -> sTxMailBox[2].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
-					CAN1 -> sTxMailBox[2].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 | mailbox.data[1] << 8 | mailbox.data[0] << 0;
+					if(mailbox.timestamp == CAN_Timestamp_Enable)
+					{
+						CAN1 -> sTxMailBox[2].TDTR = mailbox.data_length | CAN_TDT2R_TGT;
+						CAN1 -> sTxMailBox[2].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
+						CAN1 -> sTxMailBox[2].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 ;
+
+					}
+					else
+					{
+						CAN1 -> sTxMailBox[2].TDTR = mailbox.data_length;
+						CAN1 -> sTxMailBox[2].TDTR &= ~CAN_TDT2R_TGT;
+						CAN1 -> sTxMailBox[2].TDHR = mailbox.data[7] << 24 | mailbox.data[6] << 16 | mailbox.data[5] << 8 | mailbox.data[4] << 0;
+						CAN1 -> sTxMailBox[2].TDLR = mailbox.data[3] << 24 | mailbox.data[2] << 16 | mailbox.data[1] << 8 | mailbox.data[0] << 0;
+
+					}
 					CAN1 -> sTxMailBox[2].TIR  |= CAN_TI2R_TXRQ;
 				}
 				break;
