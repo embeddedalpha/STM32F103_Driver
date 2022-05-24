@@ -1,0 +1,93 @@
+/*
+ * CAN.h
+ *
+ *  Created on: May 16, 2022
+ *      Author: Kunal
+ */
+
+#ifndef CAN_H_
+#define CAN_H_
+
+
+#include "main.h"
+#include "GPIO.h"
+#include "Console.h"
+#include "CAN_Defines.h"
+
+
+#define _CAN_DEBUG_ 1
+
+typedef struct CAN_RX_Mailbox{
+
+	int message_timestamp;
+	int data_length;
+	int data[8];
+	int filter_index;
+	int frame_type;
+	int id_type;
+	int32_t ID;
+
+}CAN_RX_Mailbox;
+
+CAN_RX_Mailbox RX_Mailbox_1;
+CAN_RX_Mailbox RX_Mailbox_2;
+CAN_RX_Mailbox RX_Mailbox_3;
+
+
+typedef struct CAN_Config{
+	int32_t baudrate;
+	int timestamp_enable;
+
+	int filter_index;
+	int filter_type;
+	int filter_scale;
+	int32_t filter_bank1[13];
+	int32_t filter_bank2[13];
+
+	int TX_Timestamp;
+	int TX_ID_Type;
+	int TX_Frame_Type;
+	int TX_Mailbox_ID;
+	int32_t TX_ID;
+	int TX_data_length;
+	int TX_data[8];
+
+
+}CAN_Config;
+
+
+
+
+
+typedef struct CAN_Mailbox{
+
+
+//FILER
+	int filter_type;
+	int32_t mask[13];
+	int32_t list[13];
+
+
+// Configuration
+	int32_t baudrate;
+	int timestamp_enable;
+
+// TX
+	int TX_ID_Type;
+	int TX_Frame_Type;
+	int TX_Mailbox_ID;
+	int32_t TX_ID;
+	int TX_data_length;
+	int TX_data[8];
+
+}CAN_Mailbox;
+
+
+void CAN_Init(CAN_Mailbox mailbox);
+void CAN_Send_Payload(CAN_Mailbox mailbox);
+int CAN_Get_Operating_Mode(void);
+void CAN_Enter_Sleep_Mode(void);
+void CAN_ID_Filter(int filter_number, int filter_type, int32_t reg1, int32_t reg2 );
+void CAN_Filter(int filter_bank_number, int filter_scale, int filter_type, int32_t filter_data_1, int32_t filter_data_2);
+
+#endif /* CAN_H_ */

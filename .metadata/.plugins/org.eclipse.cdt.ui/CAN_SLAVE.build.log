@@ -1,0 +1,20 @@
+11:24:35 **** Incremental Build of configuration Debug for project CAN_SLAVE ****
+make -j4 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_SLAVE/CAN" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_SLAVE/Console" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_SLAVE/GPIO" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "CAN_SLAVE.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\CAN_SLAVE\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN_SLAVE.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN_SLAVE.elf
+ 
+arm-none-eabi-size   CAN_SLAVE.elf 
+arm-none-eabi-objdump -h -S  CAN_SLAVE.elf  > "CAN_SLAVE.list"
+arm-none-eabi-objcopy  -O binary  CAN_SLAVE.elf  "CAN_SLAVE.bin"
+   text	   data	    bss	    dec	    hex	filename
+   2676	     12	   1628	   4316	   10dc	CAN_SLAVE.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN_SLAVE.bin
+ 
+Finished building: CAN_SLAVE.list
+ 
+
+11:24:40 Build Finished. 0 errors, 0 warnings. (took 5s.17ms)
+
