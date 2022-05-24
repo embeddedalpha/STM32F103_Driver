@@ -1,5 +1,0 @@
-CAN.c:12:6:CAN_Init	16	static
-CAN.c:32:6:CAN_Enter_Sleep_Mode	16	static
-CAN.c:38:5:CAN_Get_Operating_Mode	16	static
-CAN.c:72:6:CAN_ID_Filter	24	static
-CAN.c:84:6:CAN_Send_Payload	8	static

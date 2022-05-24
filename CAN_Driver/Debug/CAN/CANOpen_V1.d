@@ -4,7 +4,7 @@ CAN/CANOpen_V1.o: ../CAN/CANOpen_V1.c ../CAN/CANOpen_V1.h ../Inc/main.h \
  ../Inc/stm32f1xx.h ../CAN/CAN.h \
  C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/GPIO/GPIO.h \
  C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/Console/Console.h \
- ../CAN/CANOpen_Desc.h
+ ../CAN/CAN_Defines.h ../CAN/CANOpen_Desc.h
 
 ../CAN/CANOpen_V1.h:
 
@@ -29,5 +29,7 @@ CAN/CANOpen_V1.o: ../CAN/CANOpen_V1.c ../CAN/CANOpen_V1.h ../Inc/main.h \
 C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/GPIO/GPIO.h:
 
 C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/Console/Console.h:
+
+../CAN/CAN_Defines.h:
 
 ../CAN/CANOpen_Desc.h:
