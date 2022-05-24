@@ -58,38 +58,52 @@ typedef struct CAN_Config{
 }CAN_Config;
 
 
-
-
-
-typedef struct CAN_Mailbox{
-
-
-//FILER
-	int filter_type;
-	int32_t mask[13];
-	int32_t list[13];
-
-
-// Configuration
-	int32_t baudrate;
-	int timestamp_enable;
-
-// TX
-	int TX_ID_Type;
-	int TX_Frame_Type;
-	int TX_Mailbox_ID;
-	int32_t TX_ID;
-	int TX_data_length;
-	int TX_data[8];
-
-}CAN_Mailbox;
-
-
+/*
+ * @func 			:	CAN_Init
+ * @rev				:	1
+ * @Comment			:	None
+ * @input param		:	mailbox
+ * @output param	:	none
+ * @operation		:	Configures the CAN controller as per the CAN_Config struct.
+ *                      Take a look at the examples and the CAN_Config structure for
+ *                      more information
+ */
 void CAN_Init(CAN_Config mailbox);
-void CAN_Send_Payload(CAN_Config mailbox);
-int CAN_Get_Operating_Mode(void);
-void CAN_Enter_Sleep_Mode(void);
-void CAN_TX_Payload(CAN_Config mailbox);
+
+/*
+ * @func 			:	CAN_Flush_TX_Buffers
+ * @rev				:	1
+ * @Comment			:	None
+ * @input param		:	buffer_id
+ * @output param	:	none
+ * @operation		:	Clears the TX buffers of CAN controller. The user can either
+ * 						clear a single buffer or all buffers at the same time.
+ */
 void CAN_Flush_TX_Buffers(int buffer_id);
+
+/*
+ * @func 			:	CAN_Get_Operating_Mode
+ * @rev				:	1
+ * @Comment			:	None
+ * @input param		:	None
+ * @output param	:	temp
+ * @operation		:	Returns the current operating mode of the CAN Controller.
+ * 						Possible return values are ->
+ * 						CAN_Initialization_Mode
+ * 						CAN_Normal_Mode
+ * 						CAN_Sleep_Mode
+ */
+int CAN_Get_Operating_Mode(void);
+
+
+
+void CAN_Send_Payload(CAN_Config mailbox);
+
+
+void CAN_TX_Payload(CAN_Config mailbox);
+
+
+
+
 
 #endif /* CAN_H_ */
