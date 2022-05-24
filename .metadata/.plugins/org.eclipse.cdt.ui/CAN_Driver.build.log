@@ -1,94 +1,21 @@
-12:01:01 **** Incremental Build of configuration Debug for project CAN_Driver ****
+15:16:31 **** Incremental Build of configuration Debug for project CAN_Driver ****
 make -j4 all 
 arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/GPIO" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/Console" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
 arm-none-eabi-gcc "../CAN/CAN.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/GPIO" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/Console" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"CAN/CAN.d" -MT"CAN/CAN.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "CAN/CAN.o"
-arm-none-eabi-gcc "../CAN/CANOpen_V1.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/GPIO" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/Console" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"CAN/CANOpen_V1.d" -MT"CAN/CANOpen_V1.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "CAN/CANOpen_V1.o"
-In file included from C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN/CAN.h:15,
-                 from ../Src/main.c:11:
-C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN/CAN_Defines.h:62: warning: "CAN_RX_Buffer_2" redefined
-   62 | #define CAN_RX_Buffer_2 6
-      | 
-C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN/CAN_Defines.h:61: note: this is the location of the previous definition
-   61 | #define CAN_RX_Buffer_2 5
-      | 
-In file included from ../CAN/CAN.h:15,
-                 from ../CAN/CAN.c:9:
-../CAN/CAN_Defines.h:62: warning: "CAN_RX_Buffer_2" redefined
-   62 | #define CAN_RX_Buffer_2 6
-      | 
-../CAN/CAN_Defines.h:61: note: this is the location of the previous definition
-   61 | #define CAN_RX_Buffer_2 5
-      | 
-In file included from ../CAN/CAN.h:15,
-                 from ../CAN/CANOpen_V1.h:12,
-                 from ../CAN/CANOpen_V1.c:9:
-../CAN/CAN_Defines.h:62: warning: "CAN_RX_Buffer_2" redefined
-   62 | #define CAN_RX_Buffer_2 6
-      | 
-../CAN/CAN_Defines.h:61: note: this is the location of the previous definition
-   61 | #define CAN_RX_Buffer_2 5
-      | 
-../CAN/CAN.c: In function 'CAN_Flush_RX_Buffers':
-../CAN/CAN.c:571:8: error: 'CAN_RX_All_Buffers' undeclared (first use in this function); did you mean 'CAN_TX_All_Buffers'?
-  571 |   case CAN_RX_All_Buffers:
-      |        ^~~~~~~~~~~~~~~~~~
-      |        CAN_TX_All_Buffers
-../CAN/CAN.c:571:8: note: each undeclared identifier is reported only once for each function it appears in
-../CAN/CAN.c:578:29: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDHR'; did you mean 'RDHR'?
-  578 |     CAN1 -> sFIFOMailBox[i].TDHR &= ~0xFFFFFFFF;
-      |                             ^~~~
-      |                             RDHR
-../CAN/CAN.c:579:29: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDLR'; did you mean 'RDLR'?
-  579 |     CAN1 -> sFIFOMailBox[i].TDLR &= ~0xFFFFFFFF;
-      |                             ^~~~
-      |                             RDLR
-../CAN/CAN.c:580:29: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDTR'; did you mean 'RDTR'?
-  580 |     CAN1 -> sFIFOMailBox[i].TDTR &= ~0xFFFFFFFF;
-      |                             ^~~~
-      |                             RDTR
-../CAN/CAN.c:581:29: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TIR'; did you mean 'RIR'?
-  581 |     CAN1 -> sFIFOMailBox[i].TIR &= ~0xFFFFFFFF;
-      |                             ^~~
-      |                             RIR
-../CAN/CAN.c:592:8: error: 'CAN_RX_Buffer_0' undeclared (first use in this function); did you mean 'CAN_RX_Buffer_2'?
-  592 |   case CAN_RX_Buffer_0:
-      |        ^~~~~~~~~~~~~~~
-      |        CAN_RX_Buffer_2
-../CAN/CAN.c:597:28: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDHR'; did you mean 'RDHR'?
-  597 |    CAN1 -> sFIFOMailBox[0].TDHR &= ~0xFFFFFFFF;
-      |                            ^~~~
-      |                            RDHR
-../CAN/CAN.c:598:28: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDLR'; did you mean 'RDLR'?
-  598 |    CAN1 -> sFIFOMailBox[0].TDLR &= ~0xFFFFFFFF;
-      |                            ^~~~
-      |                            RDLR
-../CAN/CAN.c:599:28: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDTR'; did you mean 'RDTR'?
-  599 |    CAN1 -> sFIFOMailBox[0].TDTR &= ~0xFFFFFFFF;
-      |                            ^~~~
-      |                            RDTR
-../CAN/CAN.c:600:28: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TIR'; did you mean 'RIR'?
-  600 |    CAN1 -> sFIFOMailBox[0].TIR  &= ~0xFFFFFFFF;
-      |                            ^~~
-      |                            RIR
-../CAN/CAN.c:613:28: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDHR'; did you mean 'RDHR'?
-  613 |    CAN1 -> sFIFOMailBox[1].TDHR &= ~0xFFFFFFFF;
-      |                            ^~~~
-      |                            RDHR
-../CAN/CAN.c:614:28: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDLR'; did you mean 'RDLR'?
-  614 |    CAN1 -> sFIFOMailBox[1].TDLR &= ~0xFFFFFFFF;
-      |                            ^~~~
-      |                            RDLR
-../CAN/CAN.c:615:28: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TDTR'; did you mean 'RDTR'?
-  615 |    CAN1 -> sFIFOMailBox[1].TDTR &= ~0xFFFFFFFF;
-      |                            ^~~~
-      |                            RDTR
-../CAN/CAN.c:616:28: error: 'CAN_FIFOMailBox_TypeDef' {aka 'struct <anonymous>'} has no member named 'TIR'; did you mean 'RIR'?
-  616 |    CAN1 -> sFIFOMailBox[1].TIR  &= ~0xFFFFFFFF;
-      |                            ^~~
-      |                            RIR
-make: *** [CAN/subdir.mk:22: CAN/CAN.o] Error 1
-make: *** Waiting for unfinished jobs....
-"make -j4 all" terminated with exit code 2. Build might be incomplete.
+arm-none-eabi-gcc -o "CAN_Driver.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\CAN_Driver\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN_Driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN_Driver.elf
+ 
+arm-none-eabi-size   CAN_Driver.elf 
+arm-none-eabi-objdump -h -S  CAN_Driver.elf  > "CAN_Driver.list"
+arm-none-eabi-objcopy  -O binary  CAN_Driver.elf  "CAN_Driver.bin"
+   text	   data	    bss	    dec	    hex	filename
+   1812	     12	   1572	   3396	    d44	CAN_Driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN_Driver.list
+Finished building: CAN_Driver.bin
+ 
+ 
 
-12:01:02 Build Failed. 16 errors, 3 warnings. (took 1s.98ms)
+15:16:39 Build Finished. 0 errors, 0 warnings. (took 8s.8ms)
 
