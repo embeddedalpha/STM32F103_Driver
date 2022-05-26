@@ -1,0 +1,2 @@
+CAN_v2.c:24:6:CAN_Init	8	static
+CAN_v2.c:75:6:CAN_Flush_TX_Buffers	24	static

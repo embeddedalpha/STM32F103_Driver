@@ -1,0 +1,3 @@
+CAN.c:23:6:CAN_Init	8	static
+CAN.c:74:6:CAN_Flush_TX_Buffers	24	static
+CAN.c:157:5:CAN_Send_Payload	16	static
