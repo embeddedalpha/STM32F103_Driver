@@ -1,21 +1,19 @@
 /*
  * CAN.h
  *
- *  Created on: May 16, 2022
+ *  Created on: May 26, 2022
  *      Author: Kunal
  */
 
 #ifndef CAN_H_
 #define CAN_H_
 
-
 #include "main.h"
-#include "GPIO.h"
 #include "Console.h"
+#include "GPIO.h"
 #include "CAN_Defines.h"
 
 
-#define _CAN_DEBUG_ 0
 
 typedef struct CAN_RX_Mailbox{
 
@@ -29,34 +27,25 @@ typedef struct CAN_RX_Mailbox{
 
 }CAN_RX_Mailbox;
 
-
-
-
 typedef struct CAN_Config{
 	int32_t baudrate;
 	int timestamp_enable;
-
 	int filter_index;
 	int filter_type;
 	int filter_scale;
 	int filter_bank_index;
 	uint32_t filter_bank1;
 	uint32_t filter_bank2;
-
 	int TX_ID_Type;
 	int TX_Frame_Type;
 	int TX_Timestamp;
-	int TX_Mailbox_ID;
-	int32_t TX_ID;
-	int TX_data_length;
-	int TX_data[8];
-
-	CAN_RX_Mailbox RX_Mailbox_1;
-	CAN_RX_Mailbox RX_Mailbox_2;
-	CAN_RX_Mailbox RX_Mailbox_3;
-
+//	int TX_Mailbox_ID;
+	int32_t TX_ID;							//ID of the data buffer
+	int TX_data_length;						//DLC : Data length of the buffer to be sent
+	int TX_data[8];							//Data buffer to be sent to the CAN bus
+	CAN_RX_Mailbox RX_Mailbox_1;			//Structure stores the data from RX Mailbox 1
+	CAN_RX_Mailbox RX_Mailbox_2;            //Structure stores the data from RX Mailbox 2
 }CAN_Config;
-
 
 /*
  * @func 			:	CAN_Init
@@ -82,26 +71,14 @@ void CAN_Init(CAN_Config mailbox);
 void CAN_Flush_TX_Buffers(int buffer_id);
 
 /*
- * @func 			:	CAN_Get_Operating_Mode
- * @rev				:	1
- * @Comment			:	None
- * @input param		:	None
- * @output param	:	temp
- * @operation		:	Returns the current operating mode of the CAN Controller.
- * 						Possible return values are ->
- * 						CAN_Initialization_Mode
- * 						CAN_Normal_Mode
- * 						CAN_Sleep_Mode
+ * @func 			:	CAN_Send_Payload
+ * @rev				:	2
+ * @Comment			:	Fixed Transmission Error
+ * @input param		:	mailbox
+ * @output param	:	none
+ * @operation		:	Sends a payload on the CAN bus by filling up the next available mailbox.
  */
-int CAN_Get_Operating_Mode(void);
-
-
-
-void CAN_Send_Payload(CAN_Config mailbox);
-
-
-void CAN_TX_Payload(CAN_Config mailbox);
-
+int CAN_Send_Payload(CAN_Config mailbox);
 
 
 
