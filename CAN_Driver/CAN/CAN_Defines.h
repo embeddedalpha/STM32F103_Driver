@@ -40,11 +40,31 @@
 #define CAN_Sleep_Mode			    0xEF
 #define CAN_Normal_Mode			    0x45
 
-#define CAN_Mailbox_1 0x00
-#define CAN_Mailbox_2 0xAA
-#define CAN_Mailbox_3 0xFF
+#define CAN_TX_Mailbox_0 0x00
+#define CAN_TX_Mailbox_1 0xAA
+#define CAN_TX_Mailbox_2 0xFF
 
 #define CAN_Timestamp_Enable 1
 #define CAN_Timestamp_Disable 0
+
+#define CAN_Filter_Scale_16bit 0
+#define CAN_Filter_Scale_32bit 1
+
+#define CAN_Filter_Bank_FIFO0	0
+#define CAN_Filter_Bank_FIFO1	1
+
+#define CAN_TX_Buffer_0 1
+#define CAN_TX_Buffer_1 2
+#define CAN_TX_Buffer_2 3
+
+#define CAN_RX_Buffer_1 4
+#define CAN_RX_Buffer_2 5
+
+
+#define CAN_TX_All_Buffers 10
+#define CAN_RX_ALL_Buffers 20
+
+
+
 
 #endif /* CAN_DEFINES_H_ */
