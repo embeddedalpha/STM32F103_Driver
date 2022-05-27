@@ -1201,3 +1201,13 @@
 2022-05-26 10:20:08,784 [INFO] McuFinderGlobals:52 - Set McuFinderConnectedMode to true
 2022-05-26 10:20:08,830 [INFO] ApiDb:276 - Save user favorites file C:\Users\Kunal/.stm32cubeide/favorites.mcus.txt: 0 item(s)
 2022-05-26 10:20:08,830 [INFO] ApiDb:280 - User favorites MCUs=[]
+2022-05-26 17:22:19,531 [INFO] Activator:177 - 
+
+
+2022-05-26 17:22:19,531 [INFO] Activator:178 - !SESSION log4j initialized
+2022-05-26 17:22:42,372 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-05-27 10:41:43,337 [INFO] Activator:177 - 
+
+
+2022-05-27 10:41:43,337 [INFO] Activator:178 - !SESSION log4j initialized
+2022-05-27 10:41:58,052 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
