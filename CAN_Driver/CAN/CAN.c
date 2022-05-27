@@ -34,7 +34,7 @@ void CAN_Init(CAN_Config mailbox)
 	while((CAN1 -> MSR & CAN_MSR_SLAK)){}
 	while(!(CAN1-> MSR & CAN_MSR_INAK)){}
 	CAN1 -> BTR = mailbox.baudrate;
-	CAN1->BTR |= CAN_BTR_LBKM;  //SET LBKM BIT
+//	CAN1->BTR |= CAN_BTR_LBKM;  //SET LBKM BIT
 
 	CAN1 -> FMR |= CAN_FMR_FINIT;
 	CAN1 -> FMR &= 0xFFFFC0FF;
@@ -316,3 +316,113 @@ int CAN_Send_Payload(CAN_Config mailbox)
 }
 
 
+/*
+ * @func 			:	CAN_TX_Payload
+ * @rev				:	1
+ * @Comment			:	None
+ * @input param		:	mailbox_id
+ * @output param	:	temp
+ * @operation		:	Transmits the data in the mailbox
+ */
+int CAN_Get_Payload(CAN_Config mailbox)
+{
+	int fifo1_full = 0;
+	int fifo2_full = 0;
+
+	int frame_type = 0;
+	int id_type = 0;
+
+	fifo1_full = (CAN1 -> RF0R & CAN_RF0R_FULL0_Msk) >> CAN_RF0R_FULL0_Pos;
+	fifo2_full = (CAN1 -> RF1R & CAN_RF1R_FULL1_Msk) >> CAN_RF1R_FULL1_Pos;
+
+	if(fifo1_full)
+	{
+		id_type =  (CAN1 -> sFIFOMailBox[0].RIR & CAN_RI0R_IDE_Msk) >> CAN_RI0R_IDE_Pos ;
+		frame_type = (CAN1 -> sFIFOMailBox[0].RIR & CAN_RI0R_RTR_Msk) >> CAN_RI0R_RTR_Pos ;
+
+		if(id_type)
+		{
+			//Extended ID
+			RX_Mailbox_1.id_type = CAN_ID_Extended;
+			RX_Mailbox_1.ID = (CAN1 -> sFIFOMailBox[0].RIR & CAN_RI0R_EXID_Msk) >> CAN_RI0R_EXID_Pos;
+		}
+		else
+		{
+			//Standard ID
+			RX_Mailbox_1.id_type = CAN_ID_Standard;
+			RX_Mailbox_1.ID = (CAN1 -> sFIFOMailBox[0].RIR & CAN_RI0R_STID_Msk) >> CAN_RI0R_STID_Pos;
+		}
+
+		if(frame_type)
+		{
+			//RTR Frame
+			RX_Mailbox_1.frame_type = CAN_Frame_Remote;
+			RX_Mailbox_1.data_length = (CAN1 -> sFIFOMailBox[0].RDTR & CAN_RDT0R_DLC_Msk) >> CAN_RDT0R_DLC_Pos;
+		}
+		else
+		{
+			//Data Frame
+			RX_Mailbox_1.frame_type = CAN_Frame_Data;
+			RX_Mailbox_1.data_length = (CAN1 -> sFIFOMailBox[0].RDTR & CAN_RDT0R_DLC_Msk) >> CAN_RDT0R_DLC_Pos;
+			for(int i = 0; i < RX_Mailbox_1.data_length; i++)
+			{
+				if(i < 4)
+				{
+					RX_Mailbox_1.data[i] =  (CAN1 -> sFIFOMailBox[0].RDLR & ( 0xFF << (8*i))) >> (8*i);
+				}
+				else
+				{
+					RX_Mailbox_1.data[i] =  (CAN1 -> sFIFOMailBox[0].RDHR & ( 0xFF << (8*(i-4)))) >> (8*(i-4));
+				}
+			}
+		}
+		return CAN_RX_Buffer_1;
+	}
+
+	if(fifo2_full)
+	{
+		id_type =  (CAN1 -> sFIFOMailBox[1].RIR & CAN_RI0R_IDE_Msk) >> CAN_RI0R_IDE_Pos ;
+		frame_type = (CAN1 -> sFIFOMailBox[1].RIR & CAN_RI0R_RTR_Msk) >> CAN_RI0R_RTR_Pos ;
+
+		if(id_type)
+		{
+			//Extended ID
+			RX_Mailbox_2.id_type = CAN_ID_Extended;
+			RX_Mailbox_2.ID = (CAN1 -> sFIFOMailBox[1].RIR & CAN_RI1R_EXID_Msk) >> CAN_RI1R_EXID_Pos;
+		}
+		else
+		{
+			//Standard ID
+			RX_Mailbox_2.id_type = CAN_ID_Standard;
+			RX_Mailbox_2.ID = (CAN1 -> sFIFOMailBox[1].RIR & CAN_RI1R_STID_Msk) >> CAN_RI1R_STID_Pos;
+		}
+
+		if(frame_type)
+		{
+			//RTR Frame
+			RX_Mailbox_2.frame_type = CAN_Frame_Remote;
+			RX_Mailbox_2.data_length = (CAN1 -> sFIFOMailBox[1].RDTR & CAN_RDT1R_DLC_Msk) >> CAN_RDT1R_DLC_Pos;
+		}
+		else
+		{
+			//Data Frame
+			RX_Mailbox_2.frame_type = CAN_Frame_Data;
+			RX_Mailbox_2.data_length = (CAN1 -> sFIFOMailBox[1].RDTR & CAN_RDT1R_DLC_Msk) >> CAN_RDT1R_DLC_Pos;
+			for(int i = 0; i < RX_Mailbox_2.data_length; i++)
+			{
+				if(i < 4)
+				{
+					RX_Mailbox_2.data[i] =  (CAN1 -> sFIFOMailBox[1].RDLR & ( 0xFF << (8*i))) >> (8*i);
+				}
+				else
+				{
+					RX_Mailbox_2.data[i] =  (CAN1 -> sFIFOMailBox[1].RDHR & ( 0xFF << (8*i))) >> (8*i);
+				}
+			}
+		}
+
+		return CAN_RX_Buffer_2;
+	}
+
+	return -1;
+}
