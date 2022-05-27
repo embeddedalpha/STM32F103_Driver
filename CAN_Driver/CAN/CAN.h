@@ -27,6 +27,9 @@ typedef struct CAN_RX_Mailbox{
 
 }CAN_RX_Mailbox;
 
+CAN_RX_Mailbox RX_Mailbox_1;			//Structure stores the data from RX Mailbox 1
+CAN_RX_Mailbox RX_Mailbox_2;            //Structure stores the data from RX Mailbox 2
+
 typedef struct CAN_Config{
 	int32_t baudrate;
 	int timestamp_enable;
@@ -43,8 +46,7 @@ typedef struct CAN_Config{
 	int32_t TX_ID;							//ID of the data buffer
 	int TX_data_length;						//DLC : Data length of the buffer to be sent
 	int TX_data[8];							//Data buffer to be sent to the CAN bus
-	CAN_RX_Mailbox RX_Mailbox_1;			//Structure stores the data from RX Mailbox 1
-	CAN_RX_Mailbox RX_Mailbox_2;            //Structure stores the data from RX Mailbox 2
+
 }CAN_Config;
 
 /*
@@ -81,6 +83,7 @@ void CAN_Flush_TX_Buffers(int buffer_id);
 int CAN_Send_Payload(CAN_Config mailbox);
 
 
+int CAN_Get_Payload(CAN_Config mailbox);
 
 
 #endif /* CAN_H_ */
