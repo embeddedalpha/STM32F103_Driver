@@ -332,11 +332,26 @@ int CAN_Get_Payload(CAN_Config mailbox)
 	int frame_type = 0;
 	int id_type = 0;
 
-	fifo1_full = (CAN1 -> RF0R & CAN_RF0R_FULL0_Msk) >> CAN_RF0R_FULL0_Pos;
-	fifo2_full = (CAN1 -> RF1R & CAN_RF1R_FULL1_Msk) >> CAN_RF1R_FULL1_Pos;
+	fifo1_full = (CAN1 -> RF0R & CAN_RF0R_FMP0_Msk) >> CAN_RF0R_FMP0_Pos;
+
+	fifo2_full = (CAN1 -> RF1R & CAN_RF1R_FMP1_Msk) >> CAN_RF1R_FMP1_Pos;
 
 	if(fifo1_full)
 	{
+		RX_Mailbox_1.ID = 0;
+		RX_Mailbox_1.id_type = 0;
+		RX_Mailbox_1.data[0] = 0;
+		RX_Mailbox_1.data[1] = 0;
+		RX_Mailbox_1.data[2] = 0;
+		RX_Mailbox_1.data[3] = 0;
+		RX_Mailbox_1.data[4] = 0;
+		RX_Mailbox_1.data[5] = 0;
+		RX_Mailbox_1.data[6] = 0;
+		RX_Mailbox_1.data[7] = 0;
+		RX_Mailbox_1.data_length = 0;
+
+		GPIOA -> BSRR |= GPIO_BSRR_BS0;
+		GPIOC -> BSRR |= GPIO_BSRR_BR13;
 		id_type =  (CAN1 -> sFIFOMailBox[0].RIR & CAN_RI0R_IDE_Msk) >> CAN_RI0R_IDE_Pos ;
 		frame_type = (CAN1 -> sFIFOMailBox[0].RIR & CAN_RI0R_RTR_Msk) >> CAN_RI0R_RTR_Pos ;
 
@@ -351,6 +366,12 @@ int CAN_Get_Payload(CAN_Config mailbox)
 			//Standard ID
 			RX_Mailbox_1.id_type = CAN_ID_Standard;
 			RX_Mailbox_1.ID = (CAN1 -> sFIFOMailBox[0].RIR & CAN_RI0R_STID_Msk) >> CAN_RI0R_STID_Pos;
+//			printConsole("ID = %d \r\n",RX_Mailbox_1.ID);
+		}
+
+		if(mailbox.timestamp_enable)
+		{
+			RX_Mailbox_1.message_timestamp = (CAN1 -> sFIFOMailBox[0].RDTR & CAN_RDT0R_TIME_Msk) >> CAN_RDT0R_TIME_Pos;
 		}
 
 		if(frame_type)
@@ -358,6 +379,8 @@ int CAN_Get_Payload(CAN_Config mailbox)
 			//RTR Frame
 			RX_Mailbox_1.frame_type = CAN_Frame_Remote;
 			RX_Mailbox_1.data_length = (CAN1 -> sFIFOMailBox[0].RDTR & CAN_RDT0R_DLC_Msk) >> CAN_RDT0R_DLC_Pos;
+			CAN1 -> RF0R |= CAN_RF0R_RFOM0;
+			while((CAN1 -> RF0R & CAN_RF0R_RFOM0)){}
 		}
 		else
 		{
@@ -375,6 +398,9 @@ int CAN_Get_Payload(CAN_Config mailbox)
 					RX_Mailbox_1.data[i] =  (CAN1 -> sFIFOMailBox[0].RDHR & ( 0xFF << (8*(i-4)))) >> (8*(i-4));
 				}
 			}
+
+			CAN1 -> RF0R |= CAN_RF0R_RFOM0;
+			while((CAN1 -> RF0R & CAN_RF0R_RFOM0)){}
 		}
 		return CAN_RX_Buffer_1;
 	}
@@ -397,11 +423,18 @@ int CAN_Get_Payload(CAN_Config mailbox)
 			RX_Mailbox_2.ID = (CAN1 -> sFIFOMailBox[1].RIR & CAN_RI1R_STID_Msk) >> CAN_RI1R_STID_Pos;
 		}
 
+		if(mailbox.timestamp_enable)
+		{
+			RX_Mailbox_2.message_timestamp = (CAN1 -> sFIFOMailBox[1].RDTR & CAN_RDT1R_TIME_Msk) >> CAN_RDT1R_TIME_Pos;
+		}
+
 		if(frame_type)
 		{
 			//RTR Frame
 			RX_Mailbox_2.frame_type = CAN_Frame_Remote;
 			RX_Mailbox_2.data_length = (CAN1 -> sFIFOMailBox[1].RDTR & CAN_RDT1R_DLC_Msk) >> CAN_RDT1R_DLC_Pos;
+			CAN1 -> RF1R |= CAN_RF1R_RFOM1;
+			while((CAN1 -> RF1R & CAN_RF1R_RFOM1)){}
 		}
 		else
 		{
@@ -418,6 +451,9 @@ int CAN_Get_Payload(CAN_Config mailbox)
 				{
 					RX_Mailbox_2.data[i] =  (CAN1 -> sFIFOMailBox[1].RDHR & ( 0xFF << (8*i))) >> (8*i);
 				}
+
+				CAN1 -> RF1R |= CAN_RF1R_RFOM1;
+				while((CAN1 -> RF1R & CAN_RF1R_RFOM1)){}
 			}
 		}
 
