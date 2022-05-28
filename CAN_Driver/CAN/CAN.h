@@ -82,7 +82,14 @@ void CAN_Flush_TX_Buffers(int buffer_id);
  */
 int CAN_Send_Payload(CAN_Config mailbox);
 
-
+/*
+ * @func 			:	CAN_Get_Payload
+ * @rev				:	2
+ * @Comment			:	Fixed frame drops in reception and filling time-stamp
+ * @input param		:	mailbox
+ * @output param	:	none
+ * @operation		:	Sends a payload on the CAN bus by filling up the next available mailbox.
+ */
 int CAN_Get_Payload(CAN_Config mailbox);
 
 
