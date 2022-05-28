@@ -8,6 +8,7 @@
 
 #include "Console.h"
 
+char buff[1000];
 
 void Console_Init(int32_t baudrate)
 {
@@ -23,12 +24,12 @@ void Console_Init(int32_t baudrate)
 
 void printConsole(char *msg, ...)
 {
-	char buff[10000];
+
 	va_list args;
 	va_start(args, msg);
 	vsprintf(buff, msg, args);
 
-	for(int i = 0; i<= strlen(buff); i++)
+	for(int i = 0; i<= strlen(buff)-1; i++)
 	{
 		USART1 -> DR = buff[i];
 		while (!(USART1->SR & USART_SR_TXE));
