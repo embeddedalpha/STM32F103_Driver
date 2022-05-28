@@ -1,2 +1,2 @@
-Console.c:12:6:Console_Init	16	static
-Console.c:24:6:printConsole	10016	static
+Console.c:13:6:Console_Init	16	static
+Console.c:25:6:printConsole	16	static
