@@ -9,6 +9,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Timer/subdir.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
 -include GPIO/subdir.mk
@@ -62,7 +63,7 @@ main-build: Timer_Driver.elf secondary-outputs
 
 # Tool invocations
 Timer_Driver.elf: $(OBJS) $(USER_OBJS) C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\Timer_Driver\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -u_printf_float -o "Timer_Driver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\Timer_Driver\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Timer_Driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "Timer_Driver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\Timer_Driver\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Timer_Driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

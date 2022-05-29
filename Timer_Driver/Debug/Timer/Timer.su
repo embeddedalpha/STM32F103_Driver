@@ -1,0 +1,2 @@
+Timer.c:13:6:Timer_Input_PWM	16	static
+Timer.c:34:6:Get_Input_PWM	32	static

@@ -5,3 +5,4 @@
 "./Src/sysmem.o"
 "./Src/system_stm32f1xx.o"
 "./Startup/startup_stm32f103c8tx.o"
+"./Timer/Timer.o"
