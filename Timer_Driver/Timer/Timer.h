@@ -13,6 +13,8 @@
 
 
 
-void Timer_Input_PWM(TIM_TypeDef *TIMER);
+void Timer_Input_PWM(TIM_TypeDef *Timer);
+
+void Get_Input_PWM(TIM_TypeDef *Timer, float *period, float *frequency);
 
 #endif /* TIMER_H_ */
