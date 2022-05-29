@@ -35,7 +35,7 @@ void Get_Input_PWM(TIM_TypeDef *Timer, float *period, float *frequency)
 {
 	float ms = 1.0/1000000.0;
 
-	&frequency = (float)(Timer->CCR1)*ms;
-	&period =    (float)(Timer->CCR2)*ms;
+	*frequency = ms * (float)(Timer->CCR1);
+	*period =    ms * (float)(Timer->CCR2);
 
 }
