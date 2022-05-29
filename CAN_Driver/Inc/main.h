@@ -132,6 +132,26 @@ __STATIC_INLINE uint32_t Delay_s(unsigned long s)
 
 
 
+__STATIC_INLINE void convert_float_to_char(float number,uint8_t buffer[])
+{
+	unsigned char *ptr, i;
+	ptr  = (unsigned char *)&number;
+	for(i = 0; i < sizeof(float); i++)
+	{
+		buffer[i] = *(ptr + i);
+	}
+}
+
+__STATIC_INLINE void convert_float_to_int(float number,uint8_t buffer[])
+{
+	unsigned int *ptr, i;
+	ptr  = (unsigned int *)&number;
+	for(i = 0; i < sizeof(float); i++)
+	{
+		buffer[i] = *(ptr + i);
+	}
+}
+
 
 
 
