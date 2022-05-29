@@ -1,19 +1,18 @@
-10:37:00 **** Incremental Build of configuration Debug for project CAN_Driver ****
+00:14:45 **** Incremental Build of configuration Debug for project Timer_Driver ****
 make -j4 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/GPIO" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/Console" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc "../CAN/CAN.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/GPIO" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/Console" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"CAN/CAN.d" -MT"CAN/CAN.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "CAN/CAN.o"
-arm-none-eabi-gcc "../CAN/CANOpen_V1.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/GPIO" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/CAN" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/CAN_Driver/Console" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"CAN/CANOpen_V1.d" -MT"CAN/CANOpen_V1.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "CAN/CANOpen_V1.o"
-arm-none-eabi-gcc -o "CAN_Driver.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\CAN_Driver\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN_Driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: CAN_Driver.elf
+arm-none-eabi-gcc "../Timer/Timer.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/Timer_Driver/Console" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/Timer_Driver/GPIO" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/Timer_Driver/Timer" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Timer/Timer.d" -MT"Timer/Timer.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Timer/Timer.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/Timer_Driver/Console" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/Timer_Driver/GPIO" -I"C:/Users/Kunal/STM32CubeIDE/Kunal/STM32F103_DRIVER/Timer_Driver/Timer" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "Timer_Driver.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\Kunal\STM32CubeIDE\Kunal\STM32F103_DRIVER\Timer_Driver\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Timer_Driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Timer_Driver.elf
  
-arm-none-eabi-size   CAN_Driver.elf 
-arm-none-eabi-objdump -h -S  CAN_Driver.elf  > "CAN_Driver.list"
-arm-none-eabi-objcopy  -O binary  CAN_Driver.elf  "CAN_Driver.bin"
+arm-none-eabi-size   Timer_Driver.elf 
+arm-none-eabi-objdump -h -S  Timer_Driver.elf  > "Timer_Driver.list"
    text	   data	    bss	    dec	    hex	filename
-   7024	    112	   2800	   9936	   26d0	CAN_Driver.elf
+   2944	     12	   2572	   5528	   1598	Timer_Driver.elf
+arm-none-eabi-objcopy  -O binary  Timer_Driver.elf  "Timer_Driver.bin"
 Finished building: default.size.stdout
  
-Finished building: CAN_Driver.list
-Finished building: CAN_Driver.bin
+Finished building: Timer_Driver.bin
+Finished building: Timer_Driver.list
  
  
