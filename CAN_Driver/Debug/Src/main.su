@@ -3,4 +3,4 @@ main.h:36:25:SystemAPB2_Clock_Speed	4	static
 main.h:41:22:MCU_Clock_Init	16	static
 main.h:84:26:Delay_Config	4	static
 main.c:28:6:B	16	static
-main.c:41:5:main	96	static
+main.c:41:5:main	408	static
