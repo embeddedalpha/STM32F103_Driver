@@ -30,15 +30,44 @@ typedef struct CAN_RX_Mailbox{
 CAN_RX_Mailbox RX_Mailbox_1;			//Structure stores the data from RX Mailbox 1
 CAN_RX_Mailbox RX_Mailbox_2;            //Structure stores the data from RX Mailbox 2
 
+typedef struct CAN_Filter_TypeDef{
+	int enable;
+	int type;
+	int scale;
+	int bank_id;
+	uint32_t Mask_Register;
+	uint32_t ID_Register;
+
+}CAN_Filter_TypeDef;
+
+
+
 typedef struct CAN_Config{
 	int32_t baudrate;
 	int timestamp_enable;
-	int filter_index;
-	int filter_type;
-	int filter_scale;
-	int filter_bank_index;
-	uint32_t filter_bank1;
-	uint32_t filter_bank2;
+	CAN_Filter_TypeDef Filter0;
+	CAN_Filter_TypeDef Filter1;
+	CAN_Filter_TypeDef Filter2;
+	CAN_Filter_TypeDef Filter3;
+	CAN_Filter_TypeDef Filter4;
+	CAN_Filter_TypeDef Filter5;
+	CAN_Filter_TypeDef Filter6;
+	CAN_Filter_TypeDef Filter7;
+	CAN_Filter_TypeDef Filter8;
+	CAN_Filter_TypeDef Filter9;
+	CAN_Filter_TypeDef Filter10;
+	CAN_Filter_TypeDef Filter11;
+	CAN_Filter_TypeDef Filter12;
+	CAN_Filter_TypeDef Filter13;
+//	int filter_index;
+//	int filter_type;
+//	int filter_scale;
+//	int filter_bank_index;
+//	uint32_t filter_Mask;
+//	uint32_t filter_ID;
+//
+//	uint32_t filter_bank1;
+//	uint32_t filter_bank2;
 	int TX_ID_Type;
 	int TX_Frame_Type;
 	int TX_Timestamp;
