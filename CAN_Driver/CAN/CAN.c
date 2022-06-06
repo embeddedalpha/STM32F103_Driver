@@ -39,21 +39,261 @@ void CAN_Init(CAN_Config mailbox)
 	CAN1 -> FMR |= CAN_FMR_FINIT;
 	CAN1 -> FMR &= 0xFFFFC0FF;
 	CAN1 -> FMR |= 0x1C << 8;
-	//Deactivate Filter:
-	CAN1 -> FA1R &= ~(1 << mailbox.filter_index);
-	//Set Filter Scale
-	if(mailbox.filter_scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << mailbox.filter_index);
-	if(mailbox.filter_scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << mailbox.filter_index);
-	//Set Filter Type
-	if(mailbox.filter_type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << mailbox.filter_index);
-	if(mailbox.filter_type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << mailbox.filter_index);
-	//Set FIFO for Filter Bank
-	if(mailbox.filter_type == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << mailbox.filter_index);
-	if(mailbox.filter_type == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << mailbox.filter_index);
-	//Set FIFO Bank
-	CAN1 -> sFilterRegister[mailbox.filter_index].FR1 = mailbox.filter_bank1;
-	CAN1 -> sFilterRegister[mailbox.filter_index].FR2 = mailbox.filter_bank2;
-	CAN1 -> FA1R |= 1 << mailbox.filter_index;
+
+	if(mailbox.Filter0.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 0);
+		//Set Filter Scale
+		if(mailbox.Filter0.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 0);
+		if(mailbox.Filter0.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 0);
+		//Set Filter Type
+		if(mailbox.Filter0.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 0);
+		if(mailbox.Filter0.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 0);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter0.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 0);
+		if(mailbox.Filter0.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 0);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[0].FR1 = mailbox.Filter0.ID_Register;
+		CAN1 -> sFilterRegister[0].FR2 = mailbox.Filter0.Mask_Register;
+		CAN1 -> FA1R |= 1 << 0;
+	}
+	if(mailbox.Filter1.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 1);
+		//Set Filter Scale
+		if(mailbox.Filter1.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 1);
+		if(mailbox.Filter1.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 1);
+		//Set Filter Type
+		if(mailbox.Filter1.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 1);
+		if(mailbox.Filter1.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 1);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter1.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 1);
+		if(mailbox.Filter1.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 1);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[1].FR1 = mailbox.Filter1.ID_Register;
+		CAN1 -> sFilterRegister[1].FR2 = mailbox.Filter1.Mask_Register;
+		CAN1 -> FA1R |= 1 << 1;
+	}
+	if(mailbox.Filter2.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 2);
+		//Set Filter Scale
+		if(mailbox.Filter2.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 2);
+		if(mailbox.Filter2.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 2);
+		//Set Filter Type
+		if(mailbox.Filter2.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 2);
+		if(mailbox.Filter2.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 2);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter2.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 2);
+		if(mailbox.Filter2.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 2);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[2].FR1 = mailbox.Filter2.ID_Register;
+		CAN1 -> sFilterRegister[2].FR2 = mailbox.Filter2.Mask_Register;
+		CAN1 -> FA1R |= 1 << 2;
+	}
+	if(mailbox.Filter3.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 3);
+		//Set Filter Scale
+		if(mailbox.Filter3.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 3);
+		if(mailbox.Filter3.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 3);
+		//Set Filter Type
+		if(mailbox.Filter3.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 3);
+		if(mailbox.Filter3.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 3);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter3.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 3);
+		if(mailbox.Filter3.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 3);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[3].FR1 = mailbox.Filter3.ID_Register;
+		CAN1 -> sFilterRegister[3].FR2 = mailbox.Filter3.Mask_Register;
+		CAN1 -> FA1R |= 1 << 3;
+	}
+	if(mailbox.Filter4.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 4);
+		//Set Filter Scale
+		if(mailbox.Filter4.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 4);
+		if(mailbox.Filter4.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 4);
+		//Set Filter Type
+		if(mailbox.Filter4.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 4);
+		if(mailbox.Filter4.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 4);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter4.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 4);
+		if(mailbox.Filter4.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 4);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[4].FR1 = mailbox.Filter4.ID_Register;
+		CAN1 -> sFilterRegister[4].FR2 = mailbox.Filter4.Mask_Register;
+		CAN1 -> FA1R |= 1 << 4;
+	}
+	if(mailbox.Filter5.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 5);
+		//Set Filter Scale
+		if(mailbox.Filter5.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 5);
+		if(mailbox.Filter5.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 5);
+		//Set Filter Type
+		if(mailbox.Filter5.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 5);
+		if(mailbox.Filter5.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 5);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter5.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 5);
+		if(mailbox.Filter5.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 5);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[5].FR1 = mailbox.Filter5.ID_Register;
+		CAN1 -> sFilterRegister[5].FR2 = mailbox.Filter5.Mask_Register;
+		CAN1 -> FA1R |= 1 << 5;
+	}
+	if(mailbox.Filter6.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(6 << 6);
+		//Set Filter Scale
+		if(mailbox.Filter6.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 6);
+		if(mailbox.Filter6.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 6);
+		//Set Filter Type
+		if(mailbox.Filter6.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 6);
+		if(mailbox.Filter6.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 6);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter6.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 6);
+		if(mailbox.Filter6.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 6);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[6].FR1 = mailbox.Filter6.ID_Register;
+		CAN1 -> sFilterRegister[6].FR2 = mailbox.Filter6.Mask_Register;
+		CAN1 -> FA1R |= 1 << 6;
+	}
+	if(mailbox.Filter7.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 7);
+		//Set Filter Scale
+		if(mailbox.Filter7.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 7);
+		if(mailbox.Filter7.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 7);
+		//Set Filter Type
+		if(mailbox.Filter7.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 7);
+		if(mailbox.Filter7.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 7);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter7.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 7);
+		if(mailbox.Filter7.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 7);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[7].FR1 = mailbox.Filter7.ID_Register;
+		CAN1 -> sFilterRegister[7].FR2 = mailbox.Filter7.Mask_Register;
+		CAN1 -> FA1R |= 1 << 7;
+	}
+	if(mailbox.Filter8.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 8);
+		//Set Filter Scale
+		if(mailbox.Filter8.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 8);
+		if(mailbox.Filter8.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 8);
+		//Set Filter Type
+		if(mailbox.Filter8.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 8);
+		if(mailbox.Filter8.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 8);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter8.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 8);
+		if(mailbox.Filter8.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 8);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[8].FR1 = mailbox.Filter8.ID_Register;
+		CAN1 -> sFilterRegister[8].FR2 = mailbox.Filter8.Mask_Register;
+		CAN1 -> FA1R |= 1 << 8;
+	}
+	if(mailbox.Filter9.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 9);
+		//Set Filter Scale
+		if(mailbox.Filter9.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 9);
+		if(mailbox.Filter9.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 9);
+		//Set Filter Type
+		if(mailbox.Filter9.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 9);
+		if(mailbox.Filter9.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 9);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter9.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 9);
+		if(mailbox.Filter9.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 9);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[9].FR1 = mailbox.Filter9.ID_Register;
+		CAN1 -> sFilterRegister[9].FR2 = mailbox.Filter9.Mask_Register;
+		CAN1 -> FA1R |= 1 << 9;
+	}
+	if(mailbox.Filter10.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 10);
+		//Set Filter Scale
+		if(mailbox.Filter10.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 10);
+		if(mailbox.Filter10.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 10);
+		//Set Filter Type
+		if(mailbox.Filter10.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 10);
+		if(mailbox.Filter10.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 10);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter10.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 10);
+		if(mailbox.Filter10.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 10);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[10].FR1 = mailbox.Filter10.ID_Register;
+		CAN1 -> sFilterRegister[10].FR2 = mailbox.Filter10.Mask_Register;
+		CAN1 -> FA1R |= 1 << 10;
+	}
+	if(mailbox.Filter11.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 11);
+		//Set Filter Scale
+		if(mailbox.Filter11.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 11);
+		if(mailbox.Filter11.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 11);
+		//Set Filter Type
+		if(mailbox.Filter11.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 11);
+		if(mailbox.Filter11.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 11);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter11.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 11);
+		if(mailbox.Filter11.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 11);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[11].FR1 = mailbox.Filter11.ID_Register;
+		CAN1 -> sFilterRegister[11].FR2 = mailbox.Filter11.Mask_Register;
+		CAN1 -> FA1R |= 1 << 11;
+	}
+	if(mailbox.Filter12.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 12);
+		//Set Filter Scale
+		if(mailbox.Filter12.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 12);
+		if(mailbox.Filter12.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 12);
+		//Set Filter Type
+		if(mailbox.Filter12.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 12);
+		if(mailbox.Filter12.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 12);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter12.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 12);
+		if(mailbox.Filter12.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 12);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[12].FR1 = mailbox.Filter12.ID_Register;
+		CAN1 -> sFilterRegister[12].FR2 = mailbox.Filter12.Mask_Register;
+		CAN1 -> FA1R |= 1 << 12;
+	}
+	if(mailbox.Filter13.enable)
+	{
+		//Deactivate Filter:
+		CAN1 -> FA1R &= ~(1 << 13);
+		//Set Filter Scale
+		if(mailbox.Filter13.scale == CAN_Filter_Scale_16bit) CAN1 -> FS1R &= ~(1 << 13);
+		if(mailbox.Filter13.scale == CAN_Filter_Scale_32bit) CAN1 -> FS1R |=  (1 << 13);
+		//Set Filter Type
+		if(mailbox.Filter13.type == CAN_FILTER_LIST_MODE) CAN1 -> FM1R |=  (1 << 13);
+		if(mailbox.Filter13.type == CAN_FILTER_MASK_MODE) CAN1 -> FM1R &= ~(1 << 13);
+		//Set FIFO for Filter Bank
+		if(mailbox.Filter13.bank_id == CAN_Filter_Bank_FIFO1) CAN1 -> FFA1R |=  (1 << 13);
+		if(mailbox.Filter13.bank_id == CAN_Filter_Bank_FIFO0) CAN1 -> FFA1R &= ~(1 << 13);
+		//Set FIFO Bank
+		CAN1 -> sFilterRegister[13].FR1 = mailbox.Filter13.ID_Register;
+		CAN1 -> sFilterRegister[13].FR2 = mailbox.Filter13.Mask_Register;
+		CAN1 -> FA1R |= 1 << 13;
+	}
+
+
 	CAN1 -> FMR &= ~CAN_FMR_FINIT;
      CAN1->MCR &= ~CAN_MCR_INRQ;
     CAN1->MCR &= ~CAN_MCR_INRQ;
