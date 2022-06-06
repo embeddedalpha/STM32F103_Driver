@@ -45,34 +45,35 @@ int main(void)
 	Delay_Config();
 	GPIO_Pin_Setup(GPIOC, 13, GEN_OPEN_DRAIN_OUTPUT);
 	GPIO_Pin_Setup(GPIOA, 0, GEN_PUSH_PULL_OUTPUT);
-
 	payload.baudrate = CAN_BAUDRATE_1000_KBPS;
 	payload.timestamp_enable = CAN_Timestamp_Disable;
-	payload.filter_type = CAN_FILTER_MASK_MODE;
-	payload.filter_scale = CAN_Filter_Scale_32bit;
-	payload.filter_index = 0;
-	payload.filter_bank1 = 0x00;
-	payload.filter_bank2 = 0x00;
+	payload.Filter0.enable = 1;
+	payload.Filter0.type = CAN_FILTER_MASK_MODE;
+	payload.Filter0.scale = CAN_Filter_Scale_32bit;
+	payload.Filter0.bank_id = CAN_Filter_Bank_FIFO0;
+	payload.Filter0.ID_Register = 0x201 << 21;
+	payload.Filter0.Mask_Register = 0x200 << 21;
 	CAN_Init(payload);
     /* Loop forever */
 	for(;;)
 	{
-		payload.TX_ID_Type = CAN_ID_Standard;
-		payload.TX_ID = 0x20D;
-		payload.TX_Frame_Type = CAN_Frame_Data;
-		payload.TX_data_length = 8;
-		payload.TX_data[0] = 0x01;
-		payload.TX_data[1] = 0x02;
-		payload.TX_data[2] = 0x03;
-		payload.TX_data[3] = 0x04;
-		payload.TX_data[4] = 0x05;
-		payload.TX_data[5] = 0x06;
-		payload.TX_data[6] = 0x07;
-		payload.TX_data[7] = 0x08;
-		CAN_Send_Payload(payload);
+//		payload.TX_ID_Type = CAN_ID_Standard;
+//		payload.TX_ID = 0x20D;
+//		payload.TX_Frame_Type = CAN_Frame_Data;
+//		payload.TX_data_length = 8;
+//		payload.TX_data[0] = 0x01;
+//		payload.TX_data[1] = 0x02;
+//		payload.TX_data[2] = 0x03;
+//		payload.TX_data[3] = 0x04;
+//		payload.TX_data[4] = 0x05;
+//		payload.TX_data[5] = 0x06;
+//		payload.TX_data[6] = 0x07;
+//		payload.TX_data[7] = 0x08;
+//		CAN_Send_Payload(payload);
 
 		if(CAN_Get_Payload(payload) == CAN_RX_Buffer_1)
 		{
+			GPIOC -> BSRR |= GPIO_BSRR_BR13;
 			printConsole("Data from Buffer 1\r\n");
 			printConsole("ID = 0x%"PRIx32"\r\n",RX_Mailbox_1.ID);
 			printConsole("DLC = %d\r\n",RX_Mailbox_1.data_length);
@@ -82,7 +83,9 @@ int main(void)
 				printConsole("0x%x,",RX_Mailbox_1.data[i]);
 			}
 			printConsole("\r\n");
+			GPIOC -> BSRR |= GPIO_BSRR_BS13;
 		}
+
 
 	}
 }
